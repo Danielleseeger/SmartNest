@@ -1,0 +1,60 @@
+"""
+Define all settings in this file
+"""
+class dotdict(dict):
+	"""dot.notation access to dictionary attributes"""
+	__getattr__ = dict.get
+	__setattr__ = dict.__setitem__
+	__delattr__ = dict.__delitem__
+
+EMAIL_SETTINGS = {
+	"sg_api_key": "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",
+	"to_email": "PrintedSmartNest@gmail.com", # This must be set to UCT email list
+	"from_email": "PrintedSmartNest@gmail.com", #PrintedSmartNest111
+	"subject": "SmartNest notification",
+	"content": "The SmartNest has run out of diskpace. Collect USB from SmartNest",
+}
+
+# Motion detection settings:
+# Threshold          - how much a pixel has to change by to be marked as "changed"
+# Sensitivity        - how many changed pixels before capturing an image, needs to be higher if noisy view
+# ForceCapture       - whether to force an image to be captured every forceCaptureTime seconds, values True or False
+# filepath           - location of folder to save photos
+# filenamePrefix     - string that prefixes the file name for easier identification of files.
+# diskSpaceToReserve - Delete oldest images to avoid filling disk. How much byte to keep free on disk.
+# cameraSettings   	 - "" = no extra settings;
+#                    - "-hf" = Set horizontal flip of image;
+# 					 - "-vf" = Set vertical flip;
+#					 - "-hf -vf" = both horizontal and vertical flip
+
+
+MOTION_SETTINGS = {
+	"threshold" : 50,
+	"sensitivity" : 50,
+	"forceCapture" : True,
+	"filepath" : "/home/pi/picam", # Set this to the USB path
+	"filenamePrefix" : "smartNest",
+	"diskSpaceToReserve" : 40 * 1024 * 1024,  # Keep 40 mb free on disk,
+	"cameraSettings": ""
+}
+
+# settings of the photos to save
+IMAGE_SETTINGS = {
+	"saveWidth": 1920,
+	"saveHeight": 1080,
+	"saveQuality": 100, # Set jpeg quality (0 to 100)
+	# Test-Image settings
+	"testWidth": 100,
+	"testHeight": 75,
+	# this is the default setting, if the whole image should be scanned for changed pixel
+	"testAreaCount": 1,
+}
+
+
+LOAD_CELL_SETTINGS = {
+	"reference_unit"
+}
+
+email_settings = dotdict(EMAIL_SETTINGS)
+motion_settings = dotdict(MOTION_SETTINGS)
+image_settings = dotdict(IMAGE_SETTINGS
