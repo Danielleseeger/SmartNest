@@ -1,0 +1,18 @@
+import sendgrid
+import os
+from sendgrid.helpers.mail import *
+from settings_file import email_settings
+
+def sendEmail():
+	"""
+	A function used to send emails when the SmartNest diskspace is almost full.
+	"""
+	sg = sendgrid.SendGridAPIClient(apikey=email_settings.sq_api_key)
+	from_email = Email(email_settings.from_email)
+	to_email = Email(email_settings.to_email)
+	subject = email_settings.subject
+	content = Content(email_settings.content)
+	mail = Mail(from_email, subject, to_email, content)
+	response = sg.client.mail.send.post(request_body=mail.get())
+        print "The email is sent", response
+	return response
